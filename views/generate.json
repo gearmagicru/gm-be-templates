@@ -1,0 +1,84 @@
+[
+    {
+        "xtype": "container",
+        "padding": "10 10 0 10",
+        "layout": "anchor",
+        "defaults": {
+            "labelWidth": 50,
+            "labelAlign": "right"
+        },
+        "items": [
+            {
+                "xtype": "g-field-combobox",
+                "fieldLabel": "#Theme",
+                "name": "themeName",
+                "hiddenName": "themeName",
+                "store": {
+                    "fields": ["id", "name"],
+                    "proxy": {
+                        "type": "ajax",
+                        "url": ["@backend/marketplace/themes/trigger/combo"],
+                        "extraParams": {"combo": "themes"},
+                        "reader": {
+                            "type": "json",
+                            "rootProperty": "data"
+                        }
+                    }
+                },
+                "listConfig": {
+                    "itemTpl":[ 
+                        "<div class=\"g-boundlist-item gm-templates__boundlist-theme\" data-qtip=\"{name}\">",
+                            "<img class=\"gm-templates__boundlist-theme-img\" src=\"{thumb}\">",
+                            "<div class=\"gm-templates__boundlist-theme-name\">{name} {subname}</div>",
+                            "<div class=\"gm-templates__boundlist-theme-desc\">{description}</div>",
+                            "<div class=\"gm-templates__boundlist-theme-status\">{status}</div>",
+                        "</div>"
+                    ]
+                },
+                "displayField": "name",
+                "valueField": "id",
+                "minChars": 3,
+                "queryParam": "q",
+                "queryMode": "remote",
+                "editable": false,
+                "anchor": "100%",
+                "allowBlank": false
+            },
+            {
+                "xtype": "radio",
+                "boxLabel": "#description for all templates in the theme directory",
+                "name": "type",
+                "inputValue": "all",
+                "checked": true
+            },
+            {
+                "xtype": "radio",
+                "boxLabel": "#descriptions for templates belonging to components",
+                "name": "type",
+                "inputValue": "components"
+            },
+            {
+                "xtype": "radio",
+                "boxLabel": "#description only for templates not belonging to components",
+                "name": "type",
+                "inputValue": "files"
+            },
+            {
+                "xtype": "label",
+                "ui": "header-line",
+                "text": ""
+            },
+            {
+                "xtype": "radio",
+                "boxLabel": "#remove description for all theme templates",
+                "name": "type",
+                "inputValue": "clear"
+            }
+        ]
+    },
+    {
+        "xtype": "label",
+        "ui": "note",
+        "text": "#if the template description file was created earlier, it will be replaced"
+    }
+]

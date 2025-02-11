@@ -1,0 +1,224 @@
+[
+    {
+        "xtype": "container",
+        "padding": 10,
+        "layout": "anchor",
+        "items": [
+            {
+                "xtype": "textfield",
+                "fieldLabel": "#Name",
+                "labelAlign": "right",
+                "labelWidth": 140,
+                "name": "name",
+                "maxLength": 255,
+                "width": "100%",
+                "allowBlank": false
+            },
+            {
+                "xtype": "textfield",
+                "fieldLabel": "#View in code",
+                "labelAlign": "right",
+                "labelWidth": 140,
+                "name": "view",
+                "maxLength": 255,
+                "width": "100%",
+                "allowBlank": false
+            },
+            {
+                "xtype": "textfield",
+                "fieldLabel": "#Description",
+                "labelAlign": "right",
+                "labelWidth": 140,
+                "name": "description",
+                "maxLength": 255,
+                "width": "100%",
+                "allowBlank": true
+            },
+            {
+                "xtype": "g-field-combobox",
+                "fieldLabel": "#Type",
+                "name": "type",
+                "labelAlign": "right",
+                "labelWidth": 140,
+                "width": 330,
+                "hiddenName": "type",
+                "store": {
+                    "fields": ["id", "name"],
+                    "proxy": {
+                        "type": "ajax",
+                        "url": ["@backend/templates/trigger/combo"],
+                        "extraParams": {"combo": "type"},
+                        "reader": {
+                            "type": "array",
+                            "rootProperty": "data"
+                        }
+                    }
+                },
+                "displayField": "name",
+                "valueField": "id",
+                "editable": false,
+                "allowBlank": false
+            },
+            {
+                "xtype"      : "combobox",
+                "fieldLabel" : "#Use",
+                "name"       : "use",
+                "store"      : {
+                    "fields" : ["value", "title"],
+                    "data"   : "@use"
+                },
+                "displayField" : "title",
+                "valueField"   : "value",
+                "queryMode"    : "local",
+                "editable"     : false,
+                "labelWidth"   : 140,
+                "labelAlign"   : "right",
+                "width"        : 330,
+                "allowBlank"   : false
+            },
+            {
+                "xtype": "g-field-combobox",
+                "fieldLabel": "#Language",
+                "name": "language",
+                "labelAlign": "right",
+                "labelWidth": 140,
+                "width": 330,
+                "hiddenName": "language",
+                "store": {
+                    "fields": ["id", "name"],
+                    "proxy": {
+                        "type": "ajax",
+                        "url": ["@backend/languages/trigger/combo"],
+                        "extraParams": {"combo": "language"},
+                        "reader": {
+                            "type": "array",
+                            "rootProperty": "data"
+                        }
+                    }
+                },
+                "displayField": "name",
+                "valueField": "id",
+                "editable": false,
+                "allowBlank": true
+            },
+            {
+                "xtype": "fieldset",
+                "title": "#Template affiliation",
+                "items": [
+                    {
+                        "xtype": "radio",
+                        "boxLabel": "#To module",
+                        "name": "componentType",
+                        "inputValue": "module",
+                        "handler": "onCheckComponent"
+                    },
+                    {
+                        "id": "gm-templates__modules",
+                        "xtype": "g-field-combobox",
+                        "labelWidth": 140,
+                        "width": "100%",
+                        "hiddenName": "moduleId",
+                        "name": "moduleId",
+                        "autoLoadOnValue": true,
+                        "store": {
+                            "fields": ["id", "name"],
+                            "proxy": {
+                                "type": "ajax",
+                                "url": ["@backend/marketplace/mmanager/trigger/combo"],
+                                "extraParams": {"combo": "modules", "key": "moduleId", "noneRow": 0},
+                                "reader": {
+                                    "type": "array",
+                                    "rootProperty": "data"
+                                }
+                            }
+                        },
+                        "displayField": "name",
+                        "valueField": "id",
+                        "editable": false,
+                        "allowBlank": true,
+                        "hidden": true
+                    },
+                    {
+                        "xtype": "radio",
+                        "boxLabel": "#To extension",
+                        "name": "componentType",
+                        "inputValue": "extension",
+                        "handler": "onCheckComponent"
+                    },
+                    {
+                        "id": "gm-templates__extensions",
+                        "xtype": "g-field-combobox",
+                        "labelWidth": 140,
+                        "width": "100%",
+                        "name": "extensionId",
+                        "hiddenName": "extensionId",
+                        "autoLoadOnValue": true,
+                        "store": {
+                            "fields": ["id", "name"],
+                            "proxy": {
+                                "type": "ajax",
+                                "url": ["@backend/marketplace/emanager/trigger/combo"],
+                                "extraParams": {"combo": "extensions", "key": "extensionId", "noneRow": 0},
+                                "reader": {
+                                    "type": "array",
+                                    "rootProperty": "data"
+                                }
+                            }
+                        },
+                        "displayField": "name",
+                        "valueField": "id",
+                        "editable": false,
+                        "allowBlank": true,
+                        "hidden": true
+                    },
+                    {
+                        "xtype": "radio",
+                        "boxLabel": "#To widget",
+                        "name": "componentType",
+                        "inputValue": "widget",
+                        "handler": "onCheckComponent"
+                    },
+                    {
+                        "id": "gm-templates__widgets",
+                        "xtype": "g-field-combobox",
+                        "labelWidth": 140,
+                        "width": "100%",
+                        "name": "widgetId",
+                        "hiddenName": "widgetId",
+                        "autoLoadOnValue": true,
+                        "store": {
+                            "fields": ["id", "name"],
+                            "proxy": {
+                                "type": "ajax",
+                                "url": ["@backend/marketplace/wmanager/trigger/combo"],
+                                "extraParams": {"combo": "widgets", "key": "widgetId", "noneRow": 0},
+                                "reader": {
+                                    "type": "array",
+                                    "rootProperty": "data"
+                                }
+                            }
+                        },
+                        "displayField": "name",
+                        "valueField": "id",
+                        "editable": false,
+                        "allowBlank": true,
+                        "hidden": true
+                    },
+                    {
+                        "xtype": "radio",
+                        "boxLabel": "#Autonomous",
+                        "name": "componentType",
+                        "inputValue": "",
+                        "checked": true,
+                        "handler": "onCheckComponent"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "xtype": "label",
+        "ui": "note",
+        "text": "#if the description is changed, it will be displayed the same for all languages"
+    }
+]

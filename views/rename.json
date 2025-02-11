@@ -1,0 +1,11 @@
+[
+    {
+        "xtype": "textfield",
+        "fieldLabel": "#New name",
+        "labelAlign": "right",
+        "labelWidth": 90,
+        "name": "name",
+        "maxLength": 255,
+        "width": "100%"
+    }
+]

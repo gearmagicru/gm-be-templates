@@ -1,0 +1,98 @@
+[
+    {
+        "xtype": "container",
+        "height": "auto",
+        "layout": "column",
+        "margin": "0 0 5px 0",
+        "items": [
+            {
+                "xtype": "fieldset",
+                "columnWidth": "0.333",
+                "margin": "2",
+                "title": "#Owner permission",
+                "defaults": {
+                    "xtype": "checkbox",
+                    "ui": "switch",
+                    "listeners": {"change": "onCheckPermission"}
+                },
+                "items": [
+                    {
+                        "boxLabel": "#Read",
+                        "id": "form-prm-or"
+                    },
+                    {
+                        "boxLabel": "#Write",
+                        "id": "form-prm-ow"
+                    },
+                    {
+                        "boxLabel": "#Execution",
+                        "id": "form-prm-ox"
+                    }
+                ]
+            },
+            {
+                "xtype": "fieldset",
+                "columnWidth": "0.333",
+                "margin": "2",
+                "title": "#Group permission",
+                "defaults": {
+                    "xtype": "checkbox",
+                    "ui": "switch",
+                    "listeners": {"change": "onCheckPermission"}
+                },
+                "items": [
+                    {
+                        "boxLabel": "#Read",
+                        "id": "form-prm-gr"
+                    },
+                    {
+                        "boxLabel": "#Write",
+                        "id": "form-prm-gw"
+                    },
+                    {
+                        "boxLabel": "#Execution",
+                        "id": "form-prm-gx"
+                    }
+                ]
+            },
+            {
+                "xtype": "fieldset",
+                "columnWidth": "0.333",
+                "margin": "2",
+                "title": "#World permission",
+                "defaults": {
+                    "xtype": "checkbox",
+                    "ui": "switch",
+                    "listeners": {"change": "onCheckPermission"}
+                },
+                "items": [
+                    {
+                        "boxLabel": "#Read",
+                        "name": "permission[world][r]",
+                        "id": "form-prm-wr"
+                    },
+                    {
+                        "boxLabel": "#Write",
+                        "name": "permission[world][w]",
+                        "id": "form-prm-ww"
+                    },
+                    {
+                        "boxLabel": "#Execution",
+                        "name": "permission[world][x]",
+                        "id": "form-prm-wx"
+                    }
+                ]
+            }
+        ]
+   },
+    {
+        "xtype": "textfield",
+        "fieldLabel": "#Numerical value",
+        "labelAlign": "right",
+        "labelWidth": 120,
+        "name": "pmd",
+        "id": "form-prm-digit",
+        "maxLength": 10,
+        "width": 295
+    }
+]

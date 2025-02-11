@@ -1,0 +1,9 @@
+[
+    {
+        "xtype": "codemirror",
+        "hildeLabel": true,
+        "name": "text",
+        "allowBlank": false,
+        "mode": "text/typescript"
+    }
+]
