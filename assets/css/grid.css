@@ -1,0 +1,82 @@
+/*!
+ * Шаблоны.
+ *
+ * Модуль "Шаблоны".
+ *
+ * Copyright 2015 Вeб-студия GearMagic
+ * Copyright Anton Tivonenko <anton.tivonenko@gmail.com>
+ * https://gearmagic.ru/license/
+ */
+
+/* Заливка заднего фона сетки (см. идент. viewManager) */
+#gm-templates-grid .x-tree-view {
+    background: url("../images/watermark.svg") no-repeat calc(100% - 25px) calc(100% - 20px);
+    background-size: 100px;
+}
+
+
+/**
+ * Панель инструментов сетки.
+ */
+/* Значок "Выполнить" */
+.gm-templates__icon-execute_large,
+.gm-templates__icon-execute_medium,
+.gm-templates__icon-execute { background-image: url("../images/icon-execute.svg"); }
+.gm-templates__icon-execute_small { background-image: url("../images/icon-execute_small.svg"); }
+/* Значок "Удалить" */
+.gm-templates__icon-delete_large,
+.gm-templates__icon-delete_medium,
+.gm-templates__icon-delete { background-image: url("../images/icon-delete.svg"); }
+.gm-templates__icon-delete_small { background-image: url("../images/icon-delete_small.svg"); }
+/* Значок "Создать описание шаблонов" */
+.gm-templates__icon-create-desc_large,
+.gm-templates__icon-create-desc_medium,
+.gm-templates__icon-create-desc { background-image: url("../images/icon-create_desc.svg"); }
+.gm-templates__icon-create-desc_small { background-image: url("../images/icon-create_desc_small.svg"); }
+/* Значок "Создать копии шаблонов" */
+.gm-templates__icon-create-copy_large,
+.gm-templates__icon-create-copy_medium,
+.gm-templates__icon-create-copy { background-image: url("../images/icon-create_copy.svg"); }
+.gm-templates__icon-create-copy_small { background-image: url("../images/icon-create_copy_small.svg"); }
+
+
+/**
+ * Контекстное меню сетки.
+ */
+/* Значок "Переименовать" */
+.gm-templates__icon-rename { background-image: url("../images/icon-rename.svg"); }
+/* Значок "Редактировать шаблон" */
+.gm-templates__icon-text { background-image: url("../images/icon-text.svg"); }
+/* Значок "Права доступа" */
+.gm-templates__icon-shield { background-image: url("../images/icon-shield.svg"); }
+
+
+/**
+ * Выпадающий список элементов (тем).
+ */
+.gm-templates__boundlist-theme {
+    position: relative;
+    padding-left: 67px;
+    height: 76px;
+    font: normal 12px/16px "Roboto Condensed", helvetica, arial, verdana, sans-serif;
+    line-height: 1;
+    color: #5f5f5f;
+}
+.gm-templates__boundlist-theme-img {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 56px;
+    height: 56px;
+}
+.gm-templates__boundlist-theme-name {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+.gm-templates__boundlist-theme-name span {
+    color: #eab765;
+    font-weight: normal;
+}
+.gm-templates__boundlist-theme-desc { margin-bottom: 6px; }
+.gm-templates__boundlist-theme-status { color: #3e79b4; }
+.gm-templates__boundlist-theme-status span { color: #5f5f5f; }
