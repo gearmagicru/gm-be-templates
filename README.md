@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/gearmagicru/gm-be-templates/refs/heads/master/assets/images/icon.svg" width="64px" height="64px" align="absmiddle"> Модуль панели управления "Роли и права доступа пользователей"
+# <img src="https://raw.githubusercontent.com/gearmagicru/gm-be-templates/refs/heads/master/assets/images/icon.svg" width="64px" height="64px" align="absmiddle"> Модуль панели управления "Шаблоны"
 
 Модуль предназначен для управления шаблонами страниц сайта и компонентами (модули, расширения модулей, виджеты, плагины) веб-приложения.
 
