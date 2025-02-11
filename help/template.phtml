@@ -1,0 +1,24 @@
+<?php
+/**
+ * Страница "Редактирование шаблона".
+ * 
+ * Локализации по умолчанию.
+ * 
+ * Этот файл является частью модуля веб-приложения GearMagic.
+ * 
+ * @copyright Copyright (c) 2015 Веб-студия GearMagic
+ * @license https://gearmagic.ru/license/
+ */
+?>
+<article>
+    <h1>Template editing</h1>
+    <div class="g-help-screen g-help-screen--hidable">
+        <img src="<?= $assetsUrl, '/help/template-form.png' ?>" />
+    </div>
+    <p>The form appears after selecting the <b>"Edit template"</b> item from the context menu of the selected template record.</p>
+    <p>To edit the template apply:</p>
+    <ul class="g-help-list">
+        <li><a href="<?= $url('index', 'widget:gm.wd.codemirror') ?>">Editor "CodeMirror"</a></li>
+        <li><a href="<?= $url('index', 'widget:gm.wd.tinymce') ?>">Editor "TinyMCE"</a></li>
+    </ul>
+</article>

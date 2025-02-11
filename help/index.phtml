@@ -1,0 +1,28 @@
+<?php
+/**
+ * Страница "Содержание".
+ * 
+ * Локализации по умолчанию.
+ * 
+ * Этот файл является частью модуля веб-приложения GearMagic.
+ * 
+ * @copyright Copyright (c) 2015 Веб-студия GearMagic
+ * @license https://gearmagic.ru/license/
+ */
+?>
+<article>
+    <h1>Templates</h1>
+    <div class="g-help-icon">
+        <img src="<?= $assetsUrl, '/images/icon.svg' ?>" />
+    </div>
+    <p>Site page templates and web application components.</p>
+
+    <h2>Contents:</h2>
+    <ul class="g-help-list">
+        <li><a href="<?= $url('grid') ?>">List of templates</a></li>
+        <li><a href="<?= $url('description') ?>">Description editing</a></li>
+        <li><a href="<?= $url('template') ?>">Template editing</a></li>
+        <li><a href="<?= $url('rename') ?>">Renaming a template</a></li>
+        <li><a href="<?= $url('permissions') ?>">Template permissions</a></li>
+    </ul>
+</article>

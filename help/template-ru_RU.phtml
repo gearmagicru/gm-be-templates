@@ -1,0 +1,24 @@
+<?php
+/**
+ * Страница "Редактирование шаблона".
+ * 
+ * Русская локализации.
+ * 
+ * Этот файл является частью модуля веб-приложения GearMagic.
+ * 
+ * @copyright Copyright (c) 2015 Веб-студия GearMagic
+ * @license https://gearmagic.ru/license/
+ */
+?>
+<article>
+    <h1>Форма добавления / редактирования шаблона</h1>
+    <div class="g-help-screen g-help-screen--hidable">
+        <img src="<?= $assetsUrl, '/help/template-form.png' ?>" />
+    </div>
+    <p>Форма появляется после выбора пункта <b>"Редактировать шаблон"</b> контекстного меню выбранной записи шаблона.</p>
+    <p>Для редактирования шаблона применяются:</p>
+    <ul class="g-help-list">
+        <li><a href="<?= $url('index', 'widget:gm.wd.codemirror') ?>">Редактор "CodeMirror"</a></li>
+        <li><a href="<?= $url('index', 'widget:gm.wd.tinymce') ?>">Редактор "TinyMCE"</a></li>
+    </ul>
+</article>
