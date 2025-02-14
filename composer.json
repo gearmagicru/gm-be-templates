@@ -1,13 +1,7 @@
 {
     "name": "gearmagicru/gm-be-templates",
-    "description": "Control panel module \"Templates\"",
-    "keywords": [
-        "gm",
-        "gearmagic",
-        "GM Panel",
-        "module",
-        "templates"
-    ],
+    "description": "Control Panel module \"Templates\"",
+    "keywords": ["gearmagic", "gm-panel", "gm-component", "gm-module", "module", "templates"],
     "homepage": "https://apps.gearmagic.ru/component/gm-be-templates",
     "type": "component",
     "license": "MIT",
