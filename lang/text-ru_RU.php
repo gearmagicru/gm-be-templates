@@ -70,6 +70,7 @@ return [
     'To module' => 'Модулю',
     'To widget' => 'Виджету',
     'To extension' => 'Расширению модуля',
+    'To plugin' => 'Плагину',
     'Autonomous' => 'Автономный',
     // Description: сообщения
     'if the description is changed, it will be displayed the same for all languages' => 'если описание будет изменено, то оно будет одинаково отображаться для всех языков',
