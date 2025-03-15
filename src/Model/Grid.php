@@ -11,6 +11,7 @@ namespace Gm\Backend\Templates\Model;
 
 use Gm;
 use Gm\Exception;
+use Gm\I18n\ISO\ISO;
 use Gm\Filesystem\Filesystem;
 use Gm\Mvc\Module\BaseModule;
 use Gm\Panel\Data\Model\TreeGridModel;
@@ -73,23 +74,30 @@ class Grid extends TreeGridModel
     /**
      * Конфигурация установленных модулей.
      * 
-     * @var null|array
+     * @var array
      */
-    protected $modules;
+    protected $modules = [];
 
     /**
      * Конфигурация установленных расшириений модулей.
      * 
-     * @var null|array
+     * @var array
      */
-    protected $extensions;
+    protected $extensions = [];
 
     /**
      * Конфигурация установленных виджетов.
      * 
-     * @var null|array
+     * @var array
      */
-    protected $widgets;
+    protected $widgets = [];
+
+    /**
+     * Конфигурация установленных плагинов.
+     * 
+     * @var array
+     */
+    protected $plugins = [];
 
     /**
      * Абсолютный путь к шаблонам указанной темы.
@@ -123,9 +131,9 @@ class Grid extends TreeGridModel
      * Менеджер обозначений ISO.
      * Для определения локали файла шаблона.
      * 
-     * @var null|\Gm\I18n\ISO\ISO
+     * @var ISO
      */
-    protected $iso;
+    protected ISO $iso;
 
     /**
      * Перевод имён видов компонентов.
@@ -140,6 +148,13 @@ class Grid extends TreeGridModel
      * @var array
      */
     protected array $titlesText = [];
+
+    /**
+     * Перевод используемой стороны веб-приложения.
+     * 
+     * @var array
+     */
+    protected array $sideText = [];
 
     /**
      * {@inheritdoc}
@@ -189,6 +204,8 @@ class Grid extends TreeGridModel
         $this->widgets = Gm::$app->widgets->getRegistry()->getListInfo(true, false, 'id', false);
         // конфигурации установленных расширений модулей
         $this->extensions = Gm::$app->extensions->getRegistry()->getListInfo(true, false, 'id', false);
+        // конфигурации установленных плагинов
+        $this->plugins = Gm::$app->extensions->getRegistry()->getListInfo(true, false, 'id', false);
 
         // менеджер обозначений ISO
         $this->iso = Gm::$app->locale->getISO();
@@ -215,6 +232,11 @@ class Grid extends TreeGridModel
 
         // перевод заголовка в контекстном меню записи
         $this->titlesText = [$this->t('directory: %s'), $this->t('file: %s'),];
+        // перевод стороны веб-приложения
+        $this->sideText = [
+            BACKEND  => Gm::t(BACKEND, BACKEND_NAME),
+            FRONTEND => Gm::t(BACKEND, FRONTEND_NAME)
+        ];
 
         $this
             ->on(self::EVENT_BEFORE_DELETE, function ($someRecords, &$canDelete) {
@@ -350,6 +372,9 @@ class Grid extends TreeGridModel
                 if ($componenType === 'extension') {
                     $node['component'] = $this->extensions[$componentId]['name'] ?? '';
                 }
+                if ($componenType === 'plugin') {
+                    $node['component'] = $this->plugins[$componentId]['name'] ?? '';
+                }
             }
         } else
             $node['componentType'] = $this->t('Autonomous');
@@ -384,7 +409,7 @@ class Grid extends TreeGridModel
                 if (empty($info['name']))
                     $description = $node['typeName'];
                 else
-                    $description = $node['component'] . ' "' .  $name . '"';
+                    $description = ($node['component'] ?? '') . ' "' .  $name . '"';
             }
 
             // добавления к описанию имени языка
@@ -400,7 +425,7 @@ class Grid extends TreeGridModel
          */
         if (!empty($info['use'])) {
             $node['use'] = $info['use'];
-            $node['useName'] = Gm::t('app', ucfirst($info['use']));
+            $node['useName'] = $this->sideText[$info['use']] ?? $info['use'];
         }
 
         /**
