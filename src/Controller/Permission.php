@@ -10,11 +10,9 @@
 namespace Gm\Backend\Templates\Controller;
 
 use Gm;
-use Gm\Panel\Widget\Form;
 use Gm\Panel\Http\Response;
-use Gm\Panel\Helper\ExtForm;
-use Gm\Panel\Widget\EditWindow;
 use Gm\Panel\Controller\FormController;
+use Gm\Backend\Templates\Widget\PermissionWindow;
 
 /**
  * Контроллер формы прав доступа.
@@ -33,39 +31,9 @@ class Permission extends FormController
     /**
      * {@inheritdoc}
      */
-    public function createWidget(): EditWindow
+    public function createWidget(): PermissionWindow
     {
-        /** @var EditWindow $window */
-        $window = parent::createWidget();
-
-        // окно компонента (Ext.window.Window Sencha ExtJS)
-        $window->xtype = 'g-window';
-        $window->width = 500;
-        $window->autoHeight = true;
-        $window->layout = 'fit';
-        $window->title = '#{permission.title}';
-        $window->titleTpl = '#{permission.titleTpl}';
-        $window->iconCls = 'g-icon-svg gm-templates__icon-shield';
-        $window->resizable = false;
-
-        // панель формы (Gm.view.form.Panel GmJS)
-        $window->form->controller = 'gm-be-templates-permission';
-        $window->form->router->setAll([
-            'id'    => Gm::$app->request->get('f'),
-            'route' => Gm::alias('@match', '/permission'),
-            'state' => Form::STATE_CUSTOM,
-            'rules' => [
-                'update' => '{route}/update/?f={id}',
-                'data'   => '{route}/data/?f={id}'
-            ]
-        ]);
-        $window->form->bodyPadding = 5;
-        $window->form->buttons = ExtForm::buttons(['help' => ['subject' => 'permissions'], 'save', 'cancel']);
-        $window->form->loadJSONFile('/permission', 'items');
-        $window
-            ->setNamespaceJS('Gm.be.templates')
-            ->addRequire('Gm.be.templates.PermissionController');
-        return $window;
+        return new PermissionWindow();
     }
 
     /**
@@ -85,7 +53,7 @@ class Permission extends FormController
             return $response;
         }
 
-        /** @var \Gm\Panel\Widget\EditWindow $widget */
+        /** @var PermissionWindow $widget */
         $widget = $this->getWidget();
         $response
             ->setContent($widget->run())
