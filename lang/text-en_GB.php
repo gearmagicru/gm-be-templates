@@ -69,6 +69,7 @@ return [
     'To module' => 'To module',
     'To widget' => 'To widget',
     'To extension' => 'To extension',
+    'To plugin' => 'To plugin',
     'Autonomous' => 'Autonomous',
     // Description: сообщения
     'if the description is changed, it will be displayed the same for all languages' => 'if the description is changed, it will be displayed the same for all language',
