@@ -11,11 +11,10 @@ namespace Gm\Backend\Templates\Controller;
 
 use Gm;
 use Gm\Stdlib\BaseObject;
-use Gm\Panel\Widget\Form;
 use Gm\Panel\Http\Response;
-use Gm\Panel\Helper\ExtForm;
 use Gm\Panel\Widget\EditWindow;
 use Gm\Panel\Controller\FormController;
+use Gm\Backend\Templates\Widget\TextWindow;
 
 /**
  * Контроллер формы текста шаблона.
@@ -41,68 +40,36 @@ class Text extends FormController
     protected BaseObject $editor;
 
     /**
-     * Возвращает виджет редактора.
+     * Возвращает параметры конфигурации редактора.
      * 
-     * @return BaseObject
+     * @return null|BaseObject
      */
-    protected function getEditorWidget(): BaseObject
+    protected function getEditorWidget(): ?BaseObject
     {
-        if (!isset($this->editor)) {
-            /** @var \Gm\Backend\Templates\Model\Text $model */
-            $model = $this->getModel($this->defaultModel);
+        /** @var \Gm\Backend\Templates\Model\Text $model */
+        $model = $this->getModel($this->defaultModel);
 
-            $this->editor = Gm::$app->widgets->get('gm.wd.codemirror', [
-                'fileExtension' => $model->getFileExtension()
-            ]);
+        $editor = Gm::$app->widgets->get('gm.wd.codemirror', [
+            'fileExtension' => $model->getFileExtension()
+        ]);
+        if ($editor) {
+            $editor->initResponse($this->getResponse());
+            return $editor;
         }
-        return $this->editor;
+        return null;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createWidget(): EditWindow
+    public function createWidget(): TextWindow
     {
-        /** @var EditWindow $window */
-        $window = parent::createWidget();
-
-        // окно компонента (Ext.window.Window Sencha ExtJS)
-        $window->xtype = 'g-window';
-        $window->width = 900;
-        $window->height = 500;
-        $window->bodyPadding = 1;
-        $window->maximizable = true;
-        $window->layout = 'fit';
-        $window->title = '#{text.title}';
-        $window->titleTpl = '#{text.titleTpl}';
-        $window->iconCls = 'g-icon-svg gm-templates__icon-text';
-
-        // панель формы (Gm.view.form.Panel GmJS)
-        $window->form->router->setAll([
-            'id'    => Gm::$app->request->get('f'),
-            'route' => Gm::alias('@match', '/text'),
-            'state' => Form::STATE_CUSTOM,
-            'rules' => [
-                'update' => '{route}/update/?f={id}',
-                'data'   => '{route}/data/?f={id}'
-            ]
-        ]);
-        $window->form->buttons = ExtForm::buttons(['help' => ['subject' => 'template'], 'save', 'cancel']);
-
-        /** @var null|object|\Gm\Stdlib\BaseObject $editor */
+        /** @var BaseObject|null $editor */
         $editor = $this->getEditorWidget();
-        if ($editor) {
-            /** @var array $content */
-            $content = $editor->run();
-            $content['name'] = 'text';
-        } else {
-            $content = [
-                'xtype'  => 'textarea',
-                'name'   => 'text',
-                'anchor' => '100% 100%'
-            ];
-        }
-        $window->form->items = $content;
+
+        $window = new TextWindow();
+        // указаывает редактор для окна
+        $window->setEditor($editor ? $editor->run() : []);
         return $window;
     }
 
