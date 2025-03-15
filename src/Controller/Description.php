@@ -10,10 +10,9 @@
 namespace Gm\Backend\Templates\Controller;
 
 use Gm;
-use Gm\Panel\Widget\Form;
 use Gm\Panel\Http\Response;
-use Gm\Panel\Widget\EditWindow;
 use Gm\Panel\Controller\FormController;
+use Gm\Backend\Templates\Widget\DescriptionWindow;
 
 /**
  * Контроллер формы описания шаблонв.
@@ -32,50 +31,9 @@ class Description extends FormController
     /**
      * {@inheritdoc}
      */
-    public function createWidget(): EditWindow
+    public function createWidget(): DescriptionWindow
     {
-        /** @var EditWindow $window */
-        $window = parent::createWidget();
-
-        // окно компонента (Ext.window.Window Sencha ExtJS)
-        $window->xtype = 'g-window';
-        $window->width = 500;
-        $window->autoHeight = true;
-        $window->padding = 0;
-        $window->layout = 'fit';
-        $window->title = '#{description.title}';
-        $window->titleTpl = '#{description.titleTpl}';
-        $window->iconCls = 'g-icon-svg g-icon-m_edit';
-        $window->resizable = false;
-
-        // панель формы (Gm.view.form.Panel GmJS)
-        $window->form->controller = 'gm-be-templates-description';
-        $window->form->loadJSONFile('/description', 'items', [
-            // назначение
-            '@use' => [
-                ['', Gm::t(BACKEND, '[None]')],
-                [BACKEND, Gm::t(BACKEND, BACKEND_NAME)],
-                [FRONTEND, Gm::t(BACKEND, FRONTEND_NAME)]
-            ]
-        ]);
-        $window->form->setStateButtons(
-            Form::STATE_UPDATE,
-            ['help' => ['subject' => 'description'], 'reset', 'save', 'delete', 'cancel']
-        );
-        $window->form->router->setAll([
-            'id'    => Gm::$app->request->get('f'),
-            'route' => Gm::alias('@match', '/description'),
-            'state' => Form::STATE_UPDATE,
-            'rules' => [
-                'update' => '{route}/update/?f={id}',
-                'data'   => '{route}/data/?f={id}',
-                'delete' => '{route}/delete/?f={id}',
-            ]
-        ]);
-        $window
-            ->setNamespaceJS('Gm.be.templates')
-            ->addRequire('Gm.be.templates.DescriptionController');
-        return $window;
+        return new DescriptionWindow();
     }
 
     /**
@@ -95,7 +53,7 @@ class Description extends FormController
             return $response;
         }
 
-        /** @var \Gm\Panel\Widget\EditWindow $widget */
+        /** @var DescriptionWindow $widget */
         $widget = $this->getWidget();
         $response
             ->setContent($widget->run())
