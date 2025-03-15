@@ -10,11 +10,9 @@
 namespace Gm\Backend\Templates\Controller;
 
 use Gm;
-use Gm\Panel\Widget\Form;
 use Gm\Panel\Http\Response;
-use Gm\Panel\Helper\ExtForm;
-use Gm\Panel\Widget\EditWindow;
 use Gm\Panel\Controller\FormController;
+use Gm\Backend\Templates\Widget\RenameWindow;
 
 /**
  * Контроллер формы изменения имени файла или директории.
@@ -33,34 +31,9 @@ class Rename extends FormController
     /**
      * {@inheritdoc}
      */
-    public function createWidget(): EditWindow
+    public function createWidget(): RenameWindow
     {
-        /** @var EditWindow $window */
-        $window = parent::createWidget();
-
-        // окно компонента (Ext.window.Window Sencha ExtJS)
-        $window->xtype = 'g-window';
-        $window->width = 400;
-        $window->autoHeight = true;
-        $window->layout = 'fit';
-        $window->title = '#{rename.title}';
-        $window->titleTpl = '#{rename.titleTpl}';
-        $window->iconCls = 'g-icon-svg gm-templates__icon-rename';
-
-        // панель формы (Gm.view.form.Panel GmJS)
-        $window->form->router->setAll([
-            'id'    => Gm::$app->request->get('f'),
-            'route' => Gm::alias('@match', '/rename'),
-            'state' => Form::STATE_CUSTOM,
-            'rules' => [
-                'update' => '{route}/update/?f={id}',
-                'data'   => '{route}/data/?f={id}'
-            ]
-        ]);
-        $window->form->bodyPadding = 5;
-        $window->form->buttons = ExtForm::buttons(['help' => ['subject' => 'rename'], 'save', 'cancel']);
-        $window->form->loadJSONFile('/rename', 'items');
-        return $window;
+        return new RenameWindow();
     }
 
     /**
