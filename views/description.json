@@ -121,16 +121,21 @@
                         "name": "moduleId",
                         "autoLoadOnValue": true,
                         "store": {
-                            "fields": ["id", "name"],
+                            "remoteFilter": false,
+                            "pageSize": 0,
+                            "fields": ["id", "name", "description", "icon"],
                             "proxy": {
                                 "type": "ajax",
                                 "url": ["@backend/marketplace/mmanager/trigger/combo"],
-                                "extraParams": {"combo": "modules", "key": "moduleId", "noneRow": 0},
+                                "extraParams": {"combo": "modules", "key": "id", "noneRow": 0},
                                 "reader": {
-                                    "type": "array",
+                                    "type": "json",
                                     "rootProperty": "data"
                                 }
                             }
+                        },
+                        "listConfig": {
+                            "itemTpl": "<div data-qtip=\"{description}\"><img src=\"{icon}\" width=\"16px\" align=\"absmiddle\"> {name}</div>"
                         },
                         "displayField": "name",
                         "valueField": "id",
@@ -154,16 +159,21 @@
                         "hiddenName": "extensionId",
                         "autoLoadOnValue": true,
                         "store": {
-                            "fields": ["id", "name"],
+                            "remoteFilter": false,
+                            "pageSize": 0,
+                            "fields": ["id", "name", "description", "icon"],
                             "proxy": {
                                 "type": "ajax",
                                 "url": ["@backend/marketplace/emanager/trigger/combo"],
-                                "extraParams": {"combo": "extensions", "key": "extensionId", "noneRow": 0},
+                                "extraParams": {"combo": "extensions", "key": "id", "noneRow": 0},
                                 "reader": {
-                                    "type": "array",
+                                    "type": "json",
                                     "rootProperty": "data"
                                 }
                             }
+                        },
+                        "listConfig": {
+                            "itemTpl": "<div data-qtip=\"{description}\"><img src=\"{icon}\" width=\"16px\" align=\"absmiddle\"> {name}</div>"
                         },
                         "displayField": "name",
                         "valueField": "id",
@@ -180,23 +190,66 @@
                     },
                     {
                         "id": "gm-templates__widgets",
-                        "xtype": "g-field-combobox",
+                        "xtype": "combo",
                         "labelWidth": 140,
                         "width": "100%",
                         "name": "widgetId",
                         "hiddenName": "widgetId",
                         "autoLoadOnValue": true,
                         "store": {
-                            "fields": ["id", "name"],
+                            "remoteFilter": false,
+                            "pageSize": 0,
+                            "fields": ["id", "name", "description", "icon"],
                             "proxy": {
                                 "type": "ajax",
                                 "url": ["@backend/marketplace/wmanager/trigger/combo"],
-                                "extraParams": {"combo": "widgets", "key": "widgetId", "noneRow": 0},
+                                "extraParams": {"combo": "widgets", "key": "id", "noneRow": 0},
                                 "reader": {
-                                    "type": "array",
+                                    "type": "json",
                                     "rootProperty": "data"
                                 }
                             }
+                        },
+                        "listConfig": {
+                            "itemTpl": "<div data-qtip=\"{description}\"><img src=\"{icon}\" width=\"16px\" align=\"absmiddle\"> {name}</div>"
+                        },
+                        "displayField": "name",
+                        "valueField": "id",
+                        "editable": false,
+                        "allowBlank": true,
+                        "hidden": true
+                    },
+                    {
+                        "xtype": "radio",
+                        "boxLabel": "#To plugin",
+                        "name": "componentType",
+                        "inputValue": "plugin",
+                        "handler": "onCheckComponent"
+                    },
+                    {
+                        "id": "gm-templates__plugins",
+                        "xtype": "combo",
+                        "labelWidth": 140,
+                        "width": "100%",
+                        "name": "pluginId",
+                        "hiddenName": "pluginId",
+                        "autoLoadOnValue": true,
+                        "store": {
+                            "remoteFilter": false,
+                            "pageSize": 0,
+                            "fields": ["id", "name", "description", "icon"],
+                            "proxy": {
+                                "type": "ajax",
+                                "url": ["@backend/marketplace/pmanager/trigger/combo"],
+                                "extraParams": {"combo": "plugins", "key": "id", "noneRow": 0},
+                                "reader": {
+                                    "type": "json",
+                                    "rootProperty": "data"
+                                }
+                            }
+                        },
+                        "listConfig": {
+                            "itemTpl": "<div data-qtip=\"{description}\"><img src=\"{icon}\" width=\"16px\" align=\"absmiddle\"> {name}</div>"
                         },
                         "displayField": "name",
                         "valueField": "id",
